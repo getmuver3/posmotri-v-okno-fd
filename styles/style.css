@@ -12,29 +12,31 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  inline-size: 1200px;
-  block-size: 100%;
   margin: auto;
   color: #fff;
-  font-family: 'Fira Sans Condensed', sans-serif;
+  font-family: Fira Sans Condensed, sans-serif;
   font-size: 18px;
   background-color: #1b1919;
+  inline-size: 1200px;
+  block-size: 100%;
 }
 
 .content {
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
-  width: 1140px;
+  align-items: flex-end;
   gap: 30px;
+  width: 1140px;
+  height: 534px;
 }
 
 .result {
   flex-grow: 1;
+  width: 711px;
 }
 
 .result__video-container {
-  width: 711px;
+  position: relative;
   height: 386px;
   margin-bottom: 16px;
 }
@@ -49,15 +51,18 @@ html {
 .content__details {
   display: flex;
   flex-direction: column;
-  height: 534px;
-  width: 399px;
   gap: 30px;
+  max-height: 534px;
 }
 
 .content__list {
-  max-height: 298px;
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
   gap: 30px;
+}
+
+.content__list-item {
+  padding: 0 3px 2px;
 }
 
 .content__video-card {
@@ -69,19 +74,24 @@ html {
 .search-form {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .content__list-container {
+  position: relative;
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  gap: 30px;
+  width: 399px;
+  height: 298px;
+  padding: 0 4px 2px 2px;
+  overflow-y: auto;
 }
 
 .content__video-card-thumbnail {
   min-width: 194px;
   height: 103px;
-  object-fit: contain;
+  object-fit: cover;
   object-position: right;
 }
 
@@ -92,13 +102,13 @@ html {
 }
 
 .search-form__fieldset-title {
-  font-family: Fira Sans Condensed;
+  font-family: Fira Sans Condensed, sans-serif;
   font-weight: 400;
   font-size: 18px;
 }
 
 .title {
-  font-family: Oswald;
+  font-family: Oswald, sans-serif;
   font-weight: 700;
   font-size: 75px;
   line-height: 94%;
@@ -110,125 +120,177 @@ html {
 }
 
 .content__card-link {
-  text-decoration: none;
+  display: block;
   color: white;
+  text-decoration: none;
+
+  &:active {
+    background-color: #545050;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 1px solid #fff;
+  }
+}
+
+.content__card-link_current {
+  background-color: #545050;
 }
 
 .content__video-card-title {
-  font-family: Oswald;
+  overflow: hidden;
+  font-family: Oswald, sans-serif, serif;
   font-weight: 700;
   font-size: 30px;
   line-height: 100%;
   text-transform: uppercase;
   text-overflow: ellipsis;
-  overflow: hidden;
 }
 
 .content__video-card-description {
-  font-family: Fira Sans Condensed;
+  display: -webkit-box;
+  overflow: hidden;
+  font-family: Fira Sans Condensed, sans-serif, serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 16.2px;
-  display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
-  .visually-hidden {
-    position: absolute;
-    inline-size: 1px;
-    block-size: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  inline-size: 1px;
+  block-size: 1px;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 
 .search-form__checkbox-list {
   display: flex;
   flex-direction: row;
-  gap: 5px;
   align-items: center;
+  gap: 15px;
   width: fit-content;
 }
 
 .search-form__fieldset {
+  width: 225px;
   border: 0;
 }
 
 .search-form__label {
   display: flex;
+  align-items: center;
   gap: 5px;
+  padding: 1px;
+
+  &:has(.search-form__checkbox:focus-visible) {
+    outline: 1px solid #fff;
+  }
+
+  &:has(.search-form__textfield:focus-visible) {
+    outline: 1px solid rgba(255, 255, 255, 1);
+  }
+
+  &:hover:not(:has(input.search-form__textfield)) {
+    text-decoration: underline 1px #fff;
+    cursor: pointer;
+  }
 }
 
 .search-form__textfield {
-  color: #fff;
-  appearance: none;
-}
-
-.search-form__textfield::placeholder {
-  color: rgb(255 255 255 / 0.7);
-  background-color: #1B1919;
-}
-
-.search-form__label:focus {
+  width: 225px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
   outline: none;
-}
+  color: #fff;
+  background-color: transparent;
+  appearance: none;
 
-.search-form__label:has(.search-form__textfield:focus-visible) {
-  outline: 1px solid rgba(255, 255, 255, 1);
+  &::placeholder {
+    color: rgb(255 255 255 / 0.7);
+    background-color: #1B1919;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .search-form__pseudo-checkbox {
   width: 19px;
   height: 19px;
+  margin: 1px;
   border: 1px solid rgba(255, 255, 255, 1);
   padding: 1px;
-}
 
-.search-form__pseudo-checkbox::after {
-  content: "";
-  display: block;
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  opacity: 0
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: white;
+  }
 }
 
 .search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
   opacity: 1;
 }
 
-.search-form__label:hover:not(:has(input.search-form__textfield)) {
-  cursor: pointer;
-  text-decoration: underline 1px #fff;
-}
-
- .search-form__label:has(.search-form__checkbox:focus-visible) {
-  outline: 1px solid #fff;
-}
-
 .button {
-  font-family: Fira Sans Condensed;
+  border: 1px solid #fff;
+  padding: 7px 0;
+  color: white;
+  font-family: Fira Sans Condensed, sans-serif, serif;
   font-weight: 700;
   font-size: 18px;
   line-height: 100%;
   text-align: center;
-  color: white;
-  background-color: #1B1919;
-  opacity: 1;
-  outline: 1px solid #fff;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    background-color: #545050;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 1px solid #fff;
+    outline-offset: 1px;
+  }
 }
 
 .search-form__submit-button {
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: end;
   width: 194px;
-  height: 34px;
-  gap: 10px;
 }
+
+.more-button {
+  width: 100%;
+}
+
 
 
 
